@@ -1,25 +1,15 @@
 "use strict";
-var tough = require('tough-cookie');
-var Cookie = tough.Cookie;
-var cookie = Cookie.parse(header);
-cookie.value = 'somethingdifferent';
-header = cookie.toString();
- 
-var cookiejar = new tough.CookieJar();
-cookiejar.setCookie(cookie, 'http://currentdomain.example.com/path', cb);
-// ...
-cookiejar.getCookies('http://example.com/otherpath',function(err,cookies) {
-  res.headers['cookie'] = cookies.join('; ');
-});
+
+const {session} = require("electron")
+const LocalStorage = require('./LocalStorage.js');
+
+
+
 
 
 // Set the date we're counting down to
 var countDown = 0;
 var timerHandle
-
-
-
-
 
 
 /*if (!getCookie("start_time")) {
@@ -29,8 +19,11 @@ var timerHandle
 var demo = document.getElementById("demo");
 
 function start() {
+    let _localStorage = new LocalStorage();
+    _localStorage.setCookie("test","value");
+    _localStorage.getCookie("test",(ck) => {console.log(ck)});   
     timerHandle = setInterval(function() {
-        var start_time = getCookie("start_time");
+        var start_time; //= getCookie("start_time");
         //console.log(start_time);
         countDown = Math.floor((Date.now() - start_time) / 1000);
         demo.style.setProperty('--level-color', countDown / 1500);
@@ -44,13 +37,13 @@ function start() {
 start();
 function handleStart(event) {
     countDown = 0;
-    document.cookie="start_time="+Date.now();
+    
     start();
    
 }
 
 function handleStop(event) {
-    docCookies.removeItem("start_time");
+    
     clearInterval(timerHandle);
 }
 
