@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "main": "main.js",
   "dependencies": {
-    "@exponent/electron-cookies": "^2.0.0",
-    "tough-cookie": "^2.3.3"
+   
   }
 }
