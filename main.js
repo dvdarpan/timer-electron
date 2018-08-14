@@ -2,7 +2,6 @@ const {
     app,
     BrowserWindow
 } = require('electron')
-const LocalStorage = require('./LocalStorage.js');
 
 const path = require('path')
 const url = require('url')
@@ -25,7 +24,7 @@ function createWindow() {
     
 
     // Open the DevTools.
-    //win.webContents.openDevTools()
+    win.webContents.openDevTools()
     // Emitted when the window is closed.
     win.on('closed', () => {
         // Dereference the window object, usually you would store windows
@@ -35,9 +34,7 @@ function createWindow() {
     })
     win.setResizable(false);
     win.setAlwaysOnTop(true);
-    let _localStorage = new LocalStorage();
-    _localStorage.setCookie("test","value");
-    _localStorage.getCookie("test",(ck) => {console.log(ck)});   
+   
 }
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
